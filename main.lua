@@ -1,16 +1,17 @@
 DBG = require 'debugger'
 push = require 'push'
-GAME_WIDTH = 1280
-GAME_HEIGHT = 800
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 800
-TILE_SIZE = 16
-FONT_SIZE = 20
+TILE_SIZE = 11
+FONT_SIZE = 16
+GAME_WIDTH = TILE_SIZE * 80
+GAME_HEIGHT = TILE_SIZE * 50
+WINDOW_WIDTH = GAME_WIDTH * 1.5
+WINDOW_HEIGHT = GAME_HEIGHT * 1.5
 function love.load()
     -- local font = love.graphics.newFont("VictorMono-Regular.ttf", 24)
-    font = love.graphics.newFont("dos.ttf", FONT_SIZE)
+    font = love.graphics.newFont("ibm.ttf", FONT_SIZE)
     love.graphics.setFont(font)
-    DBG()
+    -- DBG()
+    love.graphics.setDefaultFilter("nearest", "nearest")
     push:setupScreen(
         GAME_WIDTH,
         GAME_HEIGHT,
@@ -25,13 +26,13 @@ function love.draw()
     push:start()
     for i = 1, 80 do
         love.graphics.print("#", TILE_SIZE * (i - 1), 0)
-        love.graphics.print("#", TILE_SIZE * (i - 1), WINDOW_HEIGHT - TILE_SIZE)
+        love.graphics.print("#", TILE_SIZE * (i - 1), GAME_HEIGHT - TILE_SIZE)
     end
 
     love.graphics.setColor(0.1, 0.3, 0.2)
-    for y = 0, 49 do
+    for y = 1, 48 do
         for x = 0, 79 do
-            love.graphics.print(".", TILE_SIZE * x, TILE_SIZE * y)
+            love.graphics.print("W", TILE_SIZE * x, TILE_SIZE * y)
         end
     end
     love.graphics.setColor(1, 1, 0)
